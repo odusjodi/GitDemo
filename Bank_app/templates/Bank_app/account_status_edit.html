@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static "Bank_app/ui.css" %}">
+    <title>Account Status Edit</title>    
+</head>
+<body>
+    {% include 'Bank_app/header.html' %}
+    {% include 'Bank_app/normal_super_user.html' %}
+    <div id="main-container">
+       
+        <h2>Account Status Edit</h2>
+      
+        <div class="register-div">
+         <form method="POST" action="">
+          {% csrf_token %}
+            {% if hasSuccess %}
+                <p  class="success_msg">{{ hasSuccess }} </p>
+                            
+            {% endif %}
+          <ul>
+            <li class="display_text"><b>{{ account_to_edit.aUser.first_name}}</b></li>
+            <li class="display_text"><b>Account Number</b> -- {{ account_to_edit.accountNumber}}</li>
+            <li class="display_text"><b>Balance</b> -- £{{ account_to_edit.balance}} </li>
+            <li class="display_text"><b>Type</b> -- {{ account_to_edit.accountType}}</li> 
+            <li class="display_text"><b>Open Date</b> -- {{ account_to_edit.aDate}}</li>
+            <li class="display_text"><b>Account Status</b> -- {{ account_to_edit.status}}</li>
+            <input class="display_text" name="user_id_html" value="{{ account_to_edit.aUser_id}}" type="hidden"> 
+
+              <select name="account_status" id="account_status" class="display_text">
+                    <option value="1" class="display_text">Activate account</option>
+                    <option value="0" class="display_text">Deactivate account</option>
+              </select>
+          </ul>
+        <button style="background-color: rgb(190, 63, 46); color: #fff;padding: 10px;border: none;cursor: pointer;
+        width: 100%;
+        font-family: 'Arial Black';
+        font-size: 15px;
+        margin-bottom: 20px;">Update Status</button> 
+        </form>
+       </div>
+    </div>   
+    </div>
+    {% include 'Bank_app/footer.html' %}
+  
+</body>
+</html>

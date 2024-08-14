@@ -1,0 +1,30 @@
+<header>
+    <div id="header-title"><a class="hd-name" href="{% url 'indexpg' %}">ABC Banking</a>
+        
+    </div>
+    
+    <div id="header-links">
+        
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+            
+            <a class="nav-1" href="{% url 'customerview' %}"> Customers</a>
+            <a class="nav-1" href="{% url 'accountview' %}">Accounts</a>
+            <a class="nav-1" href="{% url 'registeruser' %}">Register</a>
+            <a href="{% url 'logoutuser' %}" class="nav-1">Sign Out</a>
+            <a class="nav-1" href="">Help & Support</a>
+
+        {% elif request.user.is_authenticated %}
+            <a class="nav-1" href="{% url 'transactionview' %}">View Statement</a>
+            <a class="nav-1" href="{% url 'transfer' %}">Transfer</a>
+            <a href="{% url 'logoutuser' %}" class="nav-1">Sign Out</a>
+            <a class="nav-1" href="">Help & Support</a>
+            
+        {% else %}
+            <a class="nav-1" href="{% url 'registeruser' %}">Register</a>
+            <a class="nav-1" href="{% url 'loginuser' %}">Login</a>
+            <a class="nav-1" href="">Help & Support</a>
+        {% endif %}
+    </div>
+    
+    
+</header>

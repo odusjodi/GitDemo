@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static "Bank_app/ui.css" %}">
+    <title>Welcome</title>    
+</head>
+<body>
+    {% include 'Bank_app/header.html' %}
+    {% include 'Bank_app/normal_super_user.html' %}
+    <div id="main-container">
+        
+        
+        
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+
+            <h2 style="color: brown;">As a staff, you can do the following:</h2> 
+                <ol style="color: brown; line-height: 18px; font-size: small;">
+                    <li style="font-family: Arial;">Customer registration</li>
+                    <li style="font-family: Arial;">Customer details view</li>
+                    <li style="font-family: Arial;">Customer details edit</li>
+                    <li style="font-family: Arial;"> Customer deletion</li>
+                    <li style="font-family: Arial;">Generate A/C number for customer </li>
+                    <li style="font-family: Arial;">Enable/Disable A/C numbers</li>
+                 
+                </ol>
+            {% elif request.user.is_authenticated %}
+            <h2>A/C details </h2>
+            
+                      <p style="color: rgba(49, 127, 201, 0.966); font-size:x-large; font-weight:bold; font-family:Impact;">{{customer_acc_details.accountType}}</p>
+                      <p style="color: grey; font-family: 'Franklin Gothic Medium'; font-size: smaller; display: inline;">{{customer_acc_details.accountNumber}}</p>
+                      <h2>£{{customer_acc_details.balance}}</h2>
+                      {% if customer_acc_details.status == 1 %}
+                            <p style="font-weight: bolder; color: rgb(82, 134, 82); font-family:Impact,'Arial Narrow Bold';">Active</p>
+                      {% else %}
+                      <p style=" color: rgba(170, 120, 73, 0.945); font-family:Impact,'Arial Narrow Bold';">Inactive</p>
+                      {% endif %}
+                      <p style="color: grey; font-family:'Gill Sans', 'Gill Sans MT'; font-size: small;">Date account was opened {{customer_acc_details.aDate}}</p>
+                    
+            {% else %}
+            <h2>Index page - (use session to retain information) </h2>
+
+            {% endif %}
+     
+        
+    
+    </div>   
+    </div>
+    {% include 'Bank_app/footer.html' %}
+  
+</body>
+</html>

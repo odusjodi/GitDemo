@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static "Bank_app/ui.css" %}">
+    <title>Customers</title>    
+</head>
+<body>
+    {% include 'Bank_app/header.html' %}
+    {% include 'Bank_app/normal_super_user.html' %}
+    <div id="main-container">
+        
+        <h2 style="color: brown;">Registered Customers</h2>
+        <table>
+            <tr>
+              <th class="sNumber">s/n</th>
+              <th class="tbHead">Fullname</th>
+              <th class="tbHead">Username</th>
+              <th class="sizeAccountStatus">Email</th>
+              <th class="sizeAccountStatus">Edit</th>
+              <th class="sizeAccountStatus">Delete</th>
+              <th class="sizeAccountStatus">Account</th>
+           
+            </tr>
+            {% for cust in customers %}
+            <tr class="trData">
+              <td>1</td>
+              <td>{{ cust.first_name}}</td>
+              <td>{{ cust.username}}</td>
+              <td>{{ cust.email}}</td>
+              <td><a class="addAccount" href="{% url 'customeredit' cust.id %}">Edit</a></td>
+              <td><a class="addAccount" href="{% url 'delete' cust.id %}">Delete</a></td>
+              <td>
+                {% if cust.userprofile.hasAccount == "Act" %}
+                    Ok                 
+                {% else %}
+                    <a href="{% url 'accountadd' cust.id %}" class="addAccount">+Account</a>
+                {% endif %}
+              </td>
+                
+            </tr>
+            {% endfor %}
+            
+          </table>
+              
+    </div>   
+    </div>
+    {% include 'Bank_app/footer.html' %}
+  
+</body>
+</html>

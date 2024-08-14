@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static "Bank_app/ui.css" %}">
+    <title>Create Customer</title>    
+</head>
+<body>
+    {% include 'Bank_app/header.html' %}
+    <div id="main-container">
+        <h2>Create account</h2>
+        <form method="POST" action="">
+        {% csrf_token %}
+            {% if hasSuccess %}
+                <p  class="success_msg"><strong>Success!</strong> {{message}} </p>
+            {% elif hasSuccess == False  %}
+                <p  class="danger"><strong>Error!</strong> {{message}} </p>
+            {% else %}
+                
+            {% endif %}
+
+              
+            
+        <div class="register-div">
+        <input type="textbox" id="one"  name="fullname" class="inp-text" placeholder="Full Name*" >
+        <input type="textbox" id="two"  name="username" class="inp-text" placeholder="Username*" >
+        <input type="textbox" id="three"  name="email" class="inp-text" placeholder="Email*" >
+        <input type="password" id="four"  name="pwd1" class="inp-text" placeholder="Password*" >
+        <input type="password" id="five"  name="pwd2" class="inp-text" placeholder="re-Password*" >
+           <label ><input type="checkbox" name="terms">
+            <a href=""  style="font-size: 12px; text-decoration: none; font-family: Arial, Helvetica, sans-serif;">I agree to the Terms and Conditions</a>
+        </label> <br>
+        <button style="background-color: rgb(95, 92, 86); color: #fff;padding: 10px;border: none;cursor: pointer;
+        width: 100%;
+        font-family: 'Arial Black';
+        font-size: 15px;
+        margin-bottom: 20px;">Register</button>
+        </div>
+    </form>
+    </div>   
+    </div>
+    {% include 'Bank_app/footer.html' %}
+  
+</body>
+</html>

@@ -1,0 +1,7 @@
+<p style="font-size: small; display: block; color: rgb(4, 24, 41);"> Hi<span style="font-family:Impact;"> 
+    {% if request.user.is_superuser %}
+        {{ request.user.username }}, (S)
+    {% else %}
+        {{ request.user.username }},
+    {% endif %}
+    &#128578;</span></p>

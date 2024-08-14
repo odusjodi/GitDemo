@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static "Bank_app/ui.css" %}">
+    <title>List Account Number</title>    
+</head>
+<body>
+    {% include 'Bank_app/header.html' %}
+    {% include 'Bank_app/normal_super_user.html' %}
+     
+    <div id="main-container">
+
+       
+        <h2>Customers Account </h2>
+      
+        
+        <table>
+            <tr>
+              <th class="sizeAcc">s/n</th>
+              <th class="tl_header">Name</th>
+              <th class="tl_header">Account#</th>
+              <th class="tl_header">Bal(£)</th>
+              <th class="tl_header">Type</th>
+              <th class="tl_header">Created</th>
+              <th class="sizeAcc">Status</th>
+           
+            </tr>
+            {% for account in allaccounts %}
+            <tr class="trData">
+              <td>1</td>
+              <td>{{ account.aUser.first_name}}</td>
+              <td>{{ account.accountNumber}}</td>
+              <td>{{ account.balance}}</td>
+              <td>{{ account.accountType}}</td>
+              <td>{{ account.aDate}}</td>
+              <td>
+                {% if account.status == 1 %}
+                    <a href="{% url 'accountedit' account.aUser_id  %}" style="color: green; font-weight: bold; font-family: Verdana; text-decoration: none;"> A </a>                
+                {% else %}
+                    <a href="{% url 'accountedit' account.aUser_id %}" style="color: rgb(236, 5, 5); font-weight: bold; font-family: Verdana; text-decoration: none;">D </a>
+                {% endif %}
+              </td>
+                
+            </tr>
+            {% endfor %}
+            
+          </table>  
+       
+    </div>   
+    </div>
+    {% include 'Bank_app/footer.html' %}
+  
+</body>
+</html>
